@@ -1,0 +1,25 @@
+{
+  "name": "walled-dlp-desktop",
+  "version": "1.0.0",
+  "description": "Desktop DLP guard for ChatGPT and Perplexity: native confirmation before sending prompts or uploading files that contain WALLED_SENSITIVE, plus AI response recolouring.",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/detector.test.js test/extract.test.js",
+    "test:e2e": "node --test test/e2e.test.js",
+    "test:all": "node --test test/*.test.js",
+    "samples": "node scripts/make-samples.js",
+    "package": "electron-packager . \"Walled DLP Guard\" --platform=win32 --arch=x64 --out=dist --overwrite --prune=true --no-asar --ignore=\"^/(dist|docs|test|scripts|.git)\" --ignore=\"^/node_modules/(@napi-rs|@electron|@malept|@isaacs|@types|electron)(/|$)\""
+  },
+  "author": "Nilesh Vishwakarma",
+  "license": "MIT",
+  "dependencies": {
+    "@tesseract.js-data/eng": "^1.0.0",
+    "pdfjs-dist": "^4.10.38",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "@electron/packager": "^20.3.0",
+    "electron": "^45.4.1"
+  }
+}

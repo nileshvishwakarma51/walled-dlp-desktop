@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'">
+  <title>Walled DLP Guard</title>
+  <style>
+    :root { --bg: #0f1222; --card: #181c33; --text: #e7e9f5; --muted: #9aa0c3; --accent: #7c3aed; --ok: #22c55e; --bad: #ef4444; --warn: #f59e0b; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 14px/1.45 "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 16px; }
+    h1 { font-size: 18px; margin: 0 0 4px; display: flex; align-items: center; gap: 8px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--warn); display: inline-block; }
+    .dot.running { background: var(--ok); } .dot.error, .dot.stopped { background: var(--bad); }
+    .muted { color: var(--muted); font-size: 12px; }
+    .card { background: var(--card); border-radius: 10px; padding: 12px; margin-top: 12px; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    button { background: var(--accent); color: white; border: 0; border-radius: 8px; padding: 8px 12px; font: inherit; cursor: pointer; }
+    button.ghost { background: transparent; border: 1px solid #3a4070; color: var(--text); }
+    label { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+    code { background: #0b0e1c; padding: 1px 5px; border-radius: 4px; }
+    ul { list-style: none; margin: 0; padding: 0; max-height: 300px; overflow: auto; }
+    li { padding: 6px 0; border-bottom: 1px solid #262b4a; font-size: 12.5px; }
+    .tag { display: inline-block; min-width: 64px; text-align: center; border-radius: 6px; padding: 1px 6px; margin-right: 6px; font-size: 11px; font-weight: 600; }
+    .continue { background: #14532d; } .cancel { background: #7f1d1d; } .clean { background: #1e3a8a; } .error { background: #78350f; }
+    .swatch { width: 14px; height: 14px; border-radius: 3px; display: inline-block; vertical-align: middle; }
+  </style>
+</head>
+<body>
+  <h1><span id="dot" class="dot"></span> Walled DLP Guard</h1>
+  <div id="status" class="muted">Starting...</div>
+
+  <div class="card">
+    <div class="row">
+      <button data-site="chatgpt">Open ChatGPT</button>
+      <button data-site="perplexity">Open Perplexity</button>
+      <button class="ghost" id="log">Open log file</button>
+    </div>
+    <label><input type="checkbox" id="recolor" checked> Recolour AI responses <span id="swatch" class="swatch"></span></label>
+    <div class="muted" style="margin-top:8px">Prompts and uploads (text, PDF, images) containing <code id="marker">WALLED_SENSITIVE</code> need your confirmation before they are sent.</div>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:6px">Activity</div>
+    <ul id="events"><li class="muted" id="empty">No activity yet.</li></ul>
+  </div>
+  <script src="ui.js"></script>
+</body>
+</html>

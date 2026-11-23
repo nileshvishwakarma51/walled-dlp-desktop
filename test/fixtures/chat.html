@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Fake chat</title></head>
+<body>
+  <!-- A minimal stand-in for a chat web app: composer form, send button,
+       file input, drop zone and an "assistant" answer. -->
+  <div class="answer" id="answer"><p id="answer-p">I am an AI answer.</p></div>
+  <form id="composer">
+    <textarea id="prompt" rows="2"></textarea>
+    <button id="send" type="submit" aria-label="Send message">Send</button>
+  </form>
+  <input id="file" type="file" multiple>
+  <div id="drop" style="width:200px;height:80px;border:1px solid #999">drop here</div>
+  <script>
+    window.sent = []; window.uploads = []; window.dropped = [];
+    const prompt = document.getElementById('prompt');
+    async function sendPrompt() {
+      const text = prompt.value;
+      if (!text) return;
+      window.sent.push(text);
+      prompt.value = '';
+      try { await fetch('/api/conversation', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text }) }); } catch (e) { window.fetchError = String(e); }
+    }
+    document.getElementById('composer').addEventListener('submit', (e) => { e.preventDefault(); sendPrompt(); });
+    prompt.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendPrompt(); } });
+    document.getElementById('file').addEventListener('change', (e) => { for (const f of e.target.files) window.uploads.push(f.name); });
+    const drop = document.getElementById('drop');
+    drop.addEventListener('dragover', (e) => e.preventDefault());
+    drop.addEventListener('drop', (e) => { e.preventDefault(); for (const f of e.dataTransfer.files) window.dropped.push(f.name); });
+  </script>
+</body>
+</html>
