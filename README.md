@@ -10,7 +10,7 @@ A lightweight **desktop** Data Loss Prevention (DLP) app for the **ChatGPT** (ch
 
 It is a standalone Electron app. **It does not use a browser extension, plugin or add-on.** The app starts Chrome (or Edge) itself, with its own profile, and controls it from outside through the Chrome DevTools Protocol.
 
-**Demo video (no sign-in needed):** see [Demo](#demo).
+**Demo video (Loom, no sign-in): https://www.loom.com/share/8ab1967ceadd40bdb5322842c6b40ae7**
 
 ---
 
@@ -224,8 +224,15 @@ When the UI of either site changes, the selectors to update are all in `src/core
 
 ## Demo
 
-- Video (MP4, plays in the browser, no sign-in): **https://github.com/nileshvishwakarma51/walled-dlp-desktop/releases/download/v1.0.0/walled-dlp-demo.mp4**
-- The same file is in the repo: [`docs/walled-dlp-demo.mp4`](docs/walled-dlp-demo.mp4)
+- **Loom (1:45, public, no sign-in): https://www.loom.com/share/8ab1967ceadd40bdb5322842c6b40ae7**
+- Mirror (MP4): [`docs/walled-dlp-demo.mp4`](docs/walled-dlp-demo.mp4), also attached to the [v1.0.0 release](https://github.com/nileshvishwakarma51/walled-dlp-desktop/releases/tag/v1.0.0)
+
+What the video shows, in order:
+1. ChatGPT: a normal prompt is sent with no dialog, and the response is recoloured.
+2. ChatGPT: a `WALLED_SENSITIVE` prompt opens the native dialog. Cancel blocks it, then Continue sends it.
+3. ChatGPT: an image picked in the OS file picker is caught by OCR, and Continue attaches it.
+4. Perplexity: a pasted text file, a PDF and an image each open the dialog, and Cancel blocks each one.
+5. Perplexity: a marker prompt is sent with Continue, and the answer is recoloured.
 
 ## License
 
